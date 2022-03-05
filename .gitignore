@@ -1,0 +1,10 @@
+FPS_Porting.sln
+Assembly-CSharp-Editor.csproj
+Assembly-CSharp.csproj
+.vsconfig
+Temp
+obj
+Logs
+Library
+.vs
+UserSettings
