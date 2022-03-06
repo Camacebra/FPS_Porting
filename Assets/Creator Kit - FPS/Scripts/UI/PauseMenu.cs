@@ -8,11 +8,12 @@ using UnityEditor;
 public class PauseMenu : MonoBehaviour
 {
     public static PauseMenu Instance { get; private set; }
-
+    private MenuNavigation navigation;
     void Awake()
     {
         Instance = this;
         gameObject.SetActive(false);
+        navigation = GetComponent<MenuNavigation>();
     }
 
     public void Display()
@@ -20,6 +21,8 @@ public class PauseMenu : MonoBehaviour
         gameObject.SetActive(true);
         GameSystem.Instance.StopTimer();
         Controller.Instance.DisplayCursor(true);
+        NewInputs.instace.SwitchUIButtons(true);
+        navigation.ResetNavigation();
     }
 
     public void OpenEpisode()
@@ -38,6 +41,8 @@ public class PauseMenu : MonoBehaviour
         GameSystem.Instance.StartTimer();
         gameObject.SetActive(false);
         Controller.Instance.DisplayCursor(false);
+        NewInputs.instace.SwitchUIButtons(false);
+        navigation.ExitNavigation();
     }
 
     public void ExitGame()

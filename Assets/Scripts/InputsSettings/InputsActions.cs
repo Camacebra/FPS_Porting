@@ -387,6 +387,115 @@ public class @InputsActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""NavigationUI"",
+            ""id"": ""a150ca9c-ce78-454d-a6b9-c026e800da4f"",
+            ""actions"": [
+                {
+                    ""name"": ""SelectUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""4aa726b2-d05e-45ca-9568-464d257763cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""65d64e66-9639-4151-a944-6216275758fd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ccbe90a-9058-46a1-bc72-d894217a30c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b05f9371-9fd7-4c21-b564-662c5b0aa5e3"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SelectUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c9f905c-a66f-419e-ac1b-9f8744bff829"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SelectUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97a4f7de-2189-4a0b-ab0b-c614941522cc"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SelectDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc776f22-7eeb-4ffc-9e8f-9dc36ffb24ce"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7300a3f-7e73-434b-8ce9-1040987996fc"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e92ed6b4-c66f-4721-9aa2-f78af99b97e6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfa76aa5-1a4f-47e3-be01-cd1b3c3764f9"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -431,6 +540,11 @@ public class @InputsActions : IInputActionCollection, IDisposable
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
         m_Player_SwithWeapon = m_Player.FindAction("SwithWeapon", throwIfNotFound: true);
         m_Player_SelectWeapon = m_Player.FindAction("SelectWeapon", throwIfNotFound: true);
+        // NavigationUI
+        m_NavigationUI = asset.FindActionMap("NavigationUI", throwIfNotFound: true);
+        m_NavigationUI_SelectUp = m_NavigationUI.FindAction("SelectUp", throwIfNotFound: true);
+        m_NavigationUI_SelectDown = m_NavigationUI.FindAction("SelectDown", throwIfNotFound: true);
+        m_NavigationUI_Action = m_NavigationUI.FindAction("Action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -581,6 +695,55 @@ public class @InputsActions : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // NavigationUI
+    private readonly InputActionMap m_NavigationUI;
+    private INavigationUIActions m_NavigationUIActionsCallbackInterface;
+    private readonly InputAction m_NavigationUI_SelectUp;
+    private readonly InputAction m_NavigationUI_SelectDown;
+    private readonly InputAction m_NavigationUI_Action;
+    public struct NavigationUIActions
+    {
+        private @InputsActions m_Wrapper;
+        public NavigationUIActions(@InputsActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SelectUp => m_Wrapper.m_NavigationUI_SelectUp;
+        public InputAction @SelectDown => m_Wrapper.m_NavigationUI_SelectDown;
+        public InputAction @Action => m_Wrapper.m_NavigationUI_Action;
+        public InputActionMap Get() { return m_Wrapper.m_NavigationUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(NavigationUIActions set) { return set.Get(); }
+        public void SetCallbacks(INavigationUIActions instance)
+        {
+            if (m_Wrapper.m_NavigationUIActionsCallbackInterface != null)
+            {
+                @SelectUp.started -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectUp;
+                @SelectUp.performed -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectUp;
+                @SelectUp.canceled -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectUp;
+                @SelectDown.started -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectDown;
+                @SelectDown.performed -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectDown;
+                @SelectDown.canceled -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectDown;
+                @Action.started -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnAction;
+                @Action.performed -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnAction;
+                @Action.canceled -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnAction;
+            }
+            m_Wrapper.m_NavigationUIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @SelectUp.started += instance.OnSelectUp;
+                @SelectUp.performed += instance.OnSelectUp;
+                @SelectUp.canceled += instance.OnSelectUp;
+                @SelectDown.started += instance.OnSelectDown;
+                @SelectDown.performed += instance.OnSelectDown;
+                @SelectDown.canceled += instance.OnSelectDown;
+                @Action.started += instance.OnAction;
+                @Action.performed += instance.OnAction;
+                @Action.canceled += instance.OnAction;
+            }
+        }
+    }
+    public NavigationUIActions @NavigationUI => new NavigationUIActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -611,5 +774,11 @@ public class @InputsActions : IInputActionCollection, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnSwithWeapon(InputAction.CallbackContext context);
         void OnSelectWeapon(InputAction.CallbackContext context);
+    }
+    public interface INavigationUIActions
+    {
+        void OnSelectUp(InputAction.CallbackContext context);
+        void OnSelectDown(InputAction.CallbackContext context);
+        void OnAction(InputAction.CallbackContext context);
     }
 }

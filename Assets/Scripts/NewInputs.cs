@@ -21,6 +21,15 @@ public class NewInputs : MonoBehaviour
         controls.Player.Enable();
     }
 
+    public void SwitchUIButtons(bool enable){
+        if (enable)
+            controls.NavigationUI.Enable();
+        else
+            controls.NavigationUI.Disable();
+    }
+
+    #region PlayerControls
+
     public Vector2 GetMovementDirection => controls.Player.Movement.ReadValue<Vector2>();
     public bool JumpDown => controls.Player.Jump.triggered;
     public bool MenuDown => controls.Player.Menu.triggered;
@@ -31,5 +40,12 @@ public class NewInputs : MonoBehaviour
     public bool ReloadPressed => controls.Player.Reload.phase == InputActionPhase.Started;
     public float SwitchWeapon => controls.Player.SwithWeapon.triggered ?  controls.Player.SwithWeapon.ReadValue<float>() : 0;
     public float SelectWeapon => controls.Player.SelectWeapon.triggered ? controls.Player.SelectWeapon.ReadValue<float>() : 0;
+    #endregion
 
+    #region NavigationUIControls
+    public bool NavigationUp => controls.NavigationUI.SelectUp.triggered;
+    public bool NavigationDown => controls.NavigationUI.SelectDown.triggered;
+    public bool Action => controls.NavigationUI.Action.triggered;
+
+    #endregion
 }

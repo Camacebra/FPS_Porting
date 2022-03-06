@@ -6,17 +6,14 @@ using UnityEngine;
 public class SaveData
 {
     private static SaveData _currentData;
-    public static SaveData currentData
-    {
-        get
-        {
+    public static SaveData currentData{
+        get{
             if (_currentData == null){
                 _currentData = new SaveData();
             }
             return _currentData;
         }
-        set
-        {
+        set{
             _currentData = value;
         }
     }
