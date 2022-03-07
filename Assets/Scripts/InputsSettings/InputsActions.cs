@@ -409,6 +409,22 @@ public class @InputsActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""SelectRigth"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ea1d753-7992-4ed2-8855-f71077b0ddff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""25b09b55-3bda-401d-b462-55cb09115b11"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Action"",
                     ""type"": ""Button"",
                     ""id"": ""0ccbe90a-9058-46a1-bc72-d894217a30c9"",
@@ -494,6 +510,50 @@ public class @InputsActions : IInputActionCollection, IDisposable
                     ""action"": ""Action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d16aa5ee-e44a-4e80-91a5-5ae1235dfdf0"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SelectRigth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9891269-8179-4b1f-aaa2-a39ccc6d6340"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SelectRigth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd4c50a3-1b30-4340-96eb-9fe514143581"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SelectLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54eb57e6-da10-411b-a8e7-0ceb52873d1d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SelectLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -544,6 +604,8 @@ public class @InputsActions : IInputActionCollection, IDisposable
         m_NavigationUI = asset.FindActionMap("NavigationUI", throwIfNotFound: true);
         m_NavigationUI_SelectUp = m_NavigationUI.FindAction("SelectUp", throwIfNotFound: true);
         m_NavigationUI_SelectDown = m_NavigationUI.FindAction("SelectDown", throwIfNotFound: true);
+        m_NavigationUI_SelectRigth = m_NavigationUI.FindAction("SelectRigth", throwIfNotFound: true);
+        m_NavigationUI_SelectLeft = m_NavigationUI.FindAction("SelectLeft", throwIfNotFound: true);
         m_NavigationUI_Action = m_NavigationUI.FindAction("Action", throwIfNotFound: true);
     }
 
@@ -701,6 +763,8 @@ public class @InputsActions : IInputActionCollection, IDisposable
     private INavigationUIActions m_NavigationUIActionsCallbackInterface;
     private readonly InputAction m_NavigationUI_SelectUp;
     private readonly InputAction m_NavigationUI_SelectDown;
+    private readonly InputAction m_NavigationUI_SelectRigth;
+    private readonly InputAction m_NavigationUI_SelectLeft;
     private readonly InputAction m_NavigationUI_Action;
     public struct NavigationUIActions
     {
@@ -708,6 +772,8 @@ public class @InputsActions : IInputActionCollection, IDisposable
         public NavigationUIActions(@InputsActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @SelectUp => m_Wrapper.m_NavigationUI_SelectUp;
         public InputAction @SelectDown => m_Wrapper.m_NavigationUI_SelectDown;
+        public InputAction @SelectRigth => m_Wrapper.m_NavigationUI_SelectRigth;
+        public InputAction @SelectLeft => m_Wrapper.m_NavigationUI_SelectLeft;
         public InputAction @Action => m_Wrapper.m_NavigationUI_Action;
         public InputActionMap Get() { return m_Wrapper.m_NavigationUI; }
         public void Enable() { Get().Enable(); }
@@ -724,6 +790,12 @@ public class @InputsActions : IInputActionCollection, IDisposable
                 @SelectDown.started -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectDown;
                 @SelectDown.performed -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectDown;
                 @SelectDown.canceled -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectDown;
+                @SelectRigth.started -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectRigth;
+                @SelectRigth.performed -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectRigth;
+                @SelectRigth.canceled -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectRigth;
+                @SelectLeft.started -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectLeft;
+                @SelectLeft.performed -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectLeft;
+                @SelectLeft.canceled -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnSelectLeft;
                 @Action.started -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnAction;
                 @Action.performed -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnAction;
                 @Action.canceled -= m_Wrapper.m_NavigationUIActionsCallbackInterface.OnAction;
@@ -737,6 +809,12 @@ public class @InputsActions : IInputActionCollection, IDisposable
                 @SelectDown.started += instance.OnSelectDown;
                 @SelectDown.performed += instance.OnSelectDown;
                 @SelectDown.canceled += instance.OnSelectDown;
+                @SelectRigth.started += instance.OnSelectRigth;
+                @SelectRigth.performed += instance.OnSelectRigth;
+                @SelectRigth.canceled += instance.OnSelectRigth;
+                @SelectLeft.started += instance.OnSelectLeft;
+                @SelectLeft.performed += instance.OnSelectLeft;
+                @SelectLeft.canceled += instance.OnSelectLeft;
                 @Action.started += instance.OnAction;
                 @Action.performed += instance.OnAction;
                 @Action.canceled += instance.OnAction;
@@ -779,6 +857,8 @@ public class @InputsActions : IInputActionCollection, IDisposable
     {
         void OnSelectUp(InputAction.CallbackContext context);
         void OnSelectDown(InputAction.CallbackContext context);
+        void OnSelectRigth(InputAction.CallbackContext context);
+        void OnSelectLeft(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
     }
 }

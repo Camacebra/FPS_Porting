@@ -45,6 +45,8 @@ public class NewInputs : MonoBehaviour
     #region NavigationUIControls
     public bool NavigationUp => controls.NavigationUI.SelectUp.triggered;
     public bool NavigationDown => controls.NavigationUI.SelectDown.triggered;
+    public bool NavigationRigth => controls.NavigationUI.SelectRigth.triggered;
+    public bool NavigationLeft => controls.NavigationUI.SelectLeft.triggered;
     public bool Action => controls.NavigationUI.Action.triggered;
 
     #endregion

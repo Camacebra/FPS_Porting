@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MenuNavigation : MonoBehaviour
 {
+    public enum TypeMenu{
+        Vertical,
+        Horizontal
+    }
+    [SerializeField] private TypeMenu type;
     private List<MenuSelector> menuOptions;
     private MenuSelector lastMenuOption;
     private int indexNavigation;
@@ -34,9 +39,11 @@ public class MenuNavigation : MonoBehaviour
     }
     private void Update(){
         if (!canNavigate) return;
-        if (NewInputs.instace.NavigationUp)
+        if (NewInputs.instace.NavigationUp && type == TypeMenu.Vertical || 
+            NewInputs.instace.NavigationRigth && type == TypeMenu.Horizontal)
             OnMoveUp();
-        else if (NewInputs.instace.NavigationDown)
+        else if (NewInputs.instace.NavigationDown && type == TypeMenu.Vertical ||
+            NewInputs.instace.NavigationLeft && type == TypeMenu.Horizontal)
             OnMoveDown();
         else if (NewInputs.instace.Action) {
             menuOptions[indexNavigation].OnAction();

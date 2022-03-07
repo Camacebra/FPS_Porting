@@ -12,17 +12,18 @@ public class FinalScoreUI : MonoBehaviour
     public Text TimeSpent;
     public Text FinalTime;
     public Text FinalScore;
-    
+    private MenuNavigation menu;
     void Awake()
     {
+        menu = GetComponent<MenuNavigation>();
         Instance = this;
         gameObject.SetActive(false);
     }
-
     public void Display()
     {
         gameObject.SetActive(true);
-        
+        NewInputs.instace.SwitchUIButtons(true);
+        menu.ResetNavigation();
         float time = GameSystem.Instance.RunTime;
         int targetDestroyed = GameSystem.Instance.DestroyedTarget;
         int totalTarget = GameSystem.Instance.TargetCount;

@@ -396,6 +396,22 @@
                     "interactions": ""
                 },
                 {
+                    "name": "SelectRigth",
+                    "type": "Button",
+                    "id": "3ea1d753-7992-4ed2-8855-f71077b0ddff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SelectLeft",
+                    "type": "Button",
+                    "id": "25b09b55-3bda-401d-b462-55cb09115b11",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Action",
                     "type": "Button",
                     "id": "0ccbe90a-9058-46a1-bc72-d894217a30c9",
@@ -479,6 +495,50 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d16aa5ee-e44a-4e80-91a5-5ae1235dfdf0",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "SelectRigth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9891269-8179-4b1f-aaa2-a39ccc6d6340",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SelectRigth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd4c50a3-1b30-4340-96eb-9fe514143581",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SelectLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54eb57e6-da10-411b-a8e7-0ceb52873d1d",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "SelectLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
