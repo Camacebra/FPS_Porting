@@ -112,7 +112,6 @@ public class Controller : MonoBehaviour
         if (CanPause && NewInputs.instace.MenuDown)
         {
             PauseMenu.Instance.Display();
-            SaveDatas(); //SavePlayerDatas
         }
         FullscreenMap.Instance.gameObject.SetActive(NewInputs.instace.MapPressed);
 
@@ -293,7 +292,7 @@ public class Controller : MonoBehaviour
     }
 
 
-    void SaveDatas()
+    public void SaveDatas()
     {
         SaveData.currentData.Ammo = new List<Ammo>(); 
         //Search by diccionary and save my ammo

@@ -34,7 +34,11 @@ public class PauseMenu : MonoBehaviour
         gameObject.SetActive(false);
         LevelSelectionUI.Instance.DisplayEpisode();
     }
-
+    public void SaveGame()
+    {
+        Controller.Instance.SaveDatas();
+        ReturnToGame();
+    }
     public void ReturnToGame()
     {
         UIAudioPlayer.PlayPositive();
